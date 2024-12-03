@@ -2,7 +2,7 @@ import pygame
 import random
 pygame.init()
 
-# Variables de configuración
+#Variables de configuración
 WIDTH, HEIGHT = 600, 400
 Puntuacion = (255, 0, 0)  
 FPS = 60
