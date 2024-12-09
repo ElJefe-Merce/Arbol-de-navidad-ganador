@@ -9,7 +9,6 @@ FPS = 60
 BALL_FALL_SPEED = 4
 BALL_FREQUENCY = 90
 
-
 fondo = pygame.image.load("assets/background.jpg")
 fondo = pygame.transform.scale(fondo, (WIDTH, HEIGHT))  
 Iarbol = pygame.image.load("assets/arbol.png")
@@ -20,7 +19,6 @@ GG = pygame.image.load("assets/ganador.jpg")
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.mixer.music.load("assets/musica.mp3")
 pygame.mixer.music.play(-1)
-
 
 class Ball:
     def __init__(self):
@@ -70,7 +68,7 @@ def main():
         score_text = font.render(f"Puntuacion: {score}", True, Puntuacion)
         screen.blit(score_text, (10, 10))
 
-        if score > 99:
+        if score > 5:
             screen.blit(GG, [0, 0])
             pygame.display.update()
             pygame.time.delay(10000) 
