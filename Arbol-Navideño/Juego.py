@@ -9,7 +9,7 @@ FPS = 60
 BALL_FALL_SPEED = 4
 BALL_FREQUENCY = 90
 
-fondo = pygame.image.load("assets/background.jpg")
+fondo = pygame.image.load("assets/Background.jpg")
 fondo = pygame.transform.scale(fondo, (WIDTH, HEIGHT))  
 Iarbol = pygame.image.load("assets/arbol.png")
 Iarbol = pygame.transform.scale(Iarbol, (60, 80)) 
@@ -68,7 +68,7 @@ def main():
         score_text = font.render(f"Puntuacion: {score}", True, Puntuacion)
         screen.blit(score_text, (10, 10))
 
-        if score > 5:
+        if score > 4:
             screen.blit(GG, [0, 0])
             pygame.display.update()
             pygame.time.delay(10000) 
