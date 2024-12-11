@@ -31,11 +31,14 @@ class Ball:
         screen.blit(Ibola, (self.x, self.y))
 
 def get_jugador():
+    
     input_box = pygame.Rect(200, 150, 140, 32)
     color_inactive = pygame.Color('red')
     color_active = pygame.Color('red')
     color = color_inactive
-    text = ''
+    ColorT = pygame.Color('black')
+    Text = "NOMBRE:"
+    Escribir = ''
     active = False
     clock = pygame.time.Clock()
 
@@ -53,17 +56,19 @@ def get_jugador():
             if event.type == pygame.KEYDOWN:
                 if active:
                     if event.key == pygame.K_RETURN:
-                        return text
+                        return Escribir
                     elif event.key == pygame.K_BACKSPACE:
-                        text = text[:-1]
+                        Escribir = Escribir[:-1]
                     else:
-                        text += event.unicode
+                        Escribir += event.unicode
 
         screen.fill((30, 30, 30))
-        txt_surface = pygame.font.Font(None, 32).render(text, True, color)
+        txt_above = pygame.font.Font(None, 27).render(Text, True, ColorT)
+        txt_surface = pygame.font.Font(None, 32).render(Escribir, True, color)
         width = max(200, txt_surface.get_width()+10)
         input_box.w = width
         screen.blit(fondo, (0, 0))
+        screen.blit(txt_above, (input_box.x+50, input_box.y-20))
         screen.blit(txt_surface, (input_box.x+5, input_box.y+5))
         pygame.draw.rect(screen, color, input_box, 2)
 
@@ -124,7 +129,7 @@ def main():
         pygame.display.flip()
         clock.tick(FPS)
 
-    pygame.quit()
+    main()
 
 if __name__ == "__main__":
     main()
