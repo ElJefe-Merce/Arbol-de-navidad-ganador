@@ -10,7 +10,7 @@ FPS = 60
 BALL_FALL_SPEED = 4
 BALL_FREQUENCY = 90
 
-fondo = pygame.image.load("assets/background.jpg")
+fondo = pygame.image.load("assets/Background.jpg")
 fondo = pygame.transform.scale(fondo, (WIDTH, HEIGHT))  
 Iarbol = pygame.image.load("assets/arbol.png")
 Iarbol = pygame.transform.scale(Iarbol, (60, 80)) 
