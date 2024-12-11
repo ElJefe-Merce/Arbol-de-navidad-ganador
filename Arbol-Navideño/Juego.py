@@ -1,15 +1,16 @@
 import pygame
 import random
+
 pygame.init()
 
-#Variables de configuración
+# Variables de configuración
 WIDTH, HEIGHT = 600, 400
 Puntuacion = (255, 0, 0)  
 FPS = 60
 BALL_FALL_SPEED = 4
 BALL_FREQUENCY = 90
 
-fondo = pygame.image.load("assets/Background.jpg")
+fondo = pygame.image.load("assets/background.jpg")
 fondo = pygame.transform.scale(fondo, (WIDTH, HEIGHT))  
 Iarbol = pygame.image.load("assets/arbol.png")
 Iarbol = pygame.transform.scale(Iarbol, (60, 80)) 
@@ -29,11 +30,55 @@ class Ball:
     def draw(self, screen):
         screen.blit(Ibola, (self.x, self.y))
 
+def get_jugador():
+    input_box = pygame.Rect(200, 150, 140, 32)
+    color_inactive = pygame.Color('red')
+    color_active = pygame.Color('red')
+    color = color_inactive
+    text = ''
+    active = False
+    clock = pygame.time.Clock()
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                return None
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if input_box.collidepoint(event.pos):
+                    active = not active
+                else:
+                    active = False
+                color = color_active if active else color_inactive
+            if event.type == pygame.KEYDOWN:
+                if active:
+                    if event.key == pygame.K_RETURN:
+                        return text
+                    elif event.key == pygame.K_BACKSPACE:
+                        text = text[:-1]
+                    else:
+                        text += event.unicode
+
+        screen.fill((30, 30, 30))
+        txt_surface = pygame.font.Font(None, 32).render(text, True, color)
+        width = max(200, txt_surface.get_width()+10)
+        input_box.w = width
+        screen.blit(fondo, (0, 0))
+        screen.blit(txt_surface, (input_box.x+5, input_box.y+5))
+        pygame.draw.rect(screen, color, input_box, 2)
+
+        pygame.display.flip()
+        clock.tick(30)
+
 def main():
+    jugador = get_jugador()
+    if jugador is None:
+        return
+
     clock = pygame.time.Clock()
     score = 0
     bolas = []
-    arbol_x = WIDTH //2
+    arbol_x = WIDTH // 2
     arbol_y = HEIGHT - 80
     running = True
 
@@ -61,19 +106,15 @@ def main():
                 bolas.remove(bola)
             bola.draw(screen)
 
-        
         screen.blit(Iarbol, (arbol_x, arbol_y))
-
         font = pygame.font.Font("assets/Fuente.ttf", 45)
-        score_text = font.render(f"Puntuacion: {score}", True, Puntuacion)
+        score_text = font.render(f"Puntuacion de {jugador}: {score}", True, Puntuacion)
         screen.blit(score_text, (10, 10))
 
         if score > 4:
             screen.blit(GG, [0, 0])
             pygame.display.update()
-            pygame.time.delay(10000) 
-        
-
+            pygame.time.delay(3000) 
         pygame.display.flip()
         clock.tick(FPS)
 
