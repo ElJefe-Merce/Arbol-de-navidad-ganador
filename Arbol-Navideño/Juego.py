@@ -91,9 +91,14 @@ def main():
         keys = pygame.key.get_pressed()
         if keys[pygame.K_a] and arbol_x > 0:
             arbol_x -= 5
+        if keys[pygame.K_LEFT] and arbol_x > 0:
+            arbol_x -= 5
+
         if keys[pygame.K_d] and arbol_x < WIDTH - 60:
             arbol_x += 5
-
+        if keys[pygame.K_RIGHT] and arbol_x < WIDTH - 60:
+            arbol_x += 5
+        
         if random.randint(1, BALL_FREQUENCY) == 1:
             bolas.append(Ball())
 
@@ -112,7 +117,7 @@ def main():
         screen.blit(score_text, (10, 10))
 
         if score > 4:
-            screen.blit(GG, [0, 0])
+            screen.blit(GG, (50, -50))
             pygame.display.update()
             pygame.time.delay(3000) 
         pygame.display.flip()
@@ -120,5 +125,7 @@ def main():
 
     pygame.quit()
 
+if __name__ == "__main__":
+    main()
 if __name__ == "__main__":
     main()
