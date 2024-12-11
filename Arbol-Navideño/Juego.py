@@ -119,13 +119,12 @@ def main():
         if score > 4:
             screen.blit(GG, (50, -50))
             pygame.display.update()
-            pygame.time.delay(3000) 
+            pygame.time.delay(3000)
+            running = False
         pygame.display.flip()
         clock.tick(FPS)
 
     pygame.quit()
 
-if __name__ == "__main__":
-    main()
 if __name__ == "__main__":
     main()
